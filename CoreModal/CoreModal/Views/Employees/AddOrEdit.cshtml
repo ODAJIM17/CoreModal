@@ -1,0 +1,138 @@
+﻿@model CoreModal.Data.Entities.Employee
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = null;
+}
+
+<div class="container smfont">
+    <form asp-action="AddOrEdit" autocomplete="off" asp-route-id="@Model.EmployeeID" onsubmit="return jQueryAjaxPost(this);">
+        <div class="box-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EmployeeID" />
+            <input type="hidden" asp-for="InputBy" />
+            <input type="hidden" asp-for="InputDate" />
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <span class="required">*</span>
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control smfont" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <span class="required">*</span>
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control smfont" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control smfont" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label asp-for="ContactEmail" class="control-label"></label>
+                        <input asp-for="ContactEmail" class="form-control smfont" />
+                        <span asp-validation-for="ContactEmail" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="HireDate" class="control-label"></label>
+                        <input asp-for="HireDate"  class="form-control smfont" />
+                        <span asp-validation-for="HireDate" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <span class="required">*</span>
+                        <label asp-for="Address" class="control-label"></label>
+                        <input asp-for="Address" class="form-control smfont" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <span class="required">*</span>
+                        <label asp-for="City" class="control-label"></label>
+                        <input asp-for="City" class="form-control smfont" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <span class="required">*</span>
+                        <label asp-for="State" class="control-label"></label>
+                        <input asp-for="State" class="form-control smfont text-capitalize " maxlength="2" />
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <span class="required">*</span>
+                        <label asp-for="ZipCode" class="control-label"></label>
+                        <input asp-for="ZipCode" data-mask="99999" class="form-control smfont" />
+                        <span asp-validation-for="ZipCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <span class="required">*</span>
+                        <label asp-for="Phone" class="control-label"></label>
+                        <input asp-for="Phone" data-mask="(999) 999-9999" class="form-control smfont" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <textarea asp-for="Notes" rows="5" class="form-control smfont"></textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal"><i class="fas fa-recycle"></i> Cancel</button>
+            <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-save"></i> Submit</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+}

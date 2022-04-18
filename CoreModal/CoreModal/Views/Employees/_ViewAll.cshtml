@@ -1,0 +1,108 @@
+﻿@model IEnumerable<CoreModal.Data.Entities.Employee>
+
+
+<table class="table table-striped table-responsive-md table-bordered smfont"  id="EmployeeTable">
+    <colgroup>
+        <col span="1" />
+        <col span="1" />
+        <col span="1" />
+        <col span="1" />
+        <col span="1" />
+        <col span="1" />
+        <col span="1" />
+        <col span="1" width="310" />
+        <col span="1" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HireDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notes)
+            </th>
+
+            <th>
+                <a onclick="showInPopup('@Url.Action("AddOrEdit","Employees",new {id=0 },Context.Request.Scheme)','New Employee')" class="btn btn-sm btn-primary text-white"><i class="fa fa-plus-circle"></i> Employee</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr style="font-family:Tahoma;font-size:13px">
+
+            <td>
+                <a asp-action="Details" asp-controller="Employees" asp-route-Id="@item.EmployeeID">@Html.DisplayFor(modelItem => item.FullName)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HireDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            <td>
+                @{
+                    if (item.Notes != null)
+                    {
+                        string[] noteWords = item.Notes.Split(' ');
+                        if (noteWords.Count() > 7)
+                        {
+                            <a class="" role="button" data-bs-toggle="collapse" href="#collapseSum@(item.EmployeeID)" aria-expanded="false" aria-controls="collapseSum@(item.EmployeeID)">
+                                @(string.Join(" ", noteWords.Take(7)) + "...")
+                            </a>
+                            <div class="collapse" id="collapseSum@(item.EmployeeID)">
+                                <div class="well">
+                                    @(string.Join(" ", noteWords.Skip(7)))
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Notes);
+                        }
+                    }
+                }
+            </td>
+
+
+            <td>
+                <a onclick="showInPopup('@Url.Action("AddOrEdit","Employees",new {id=item.EmployeeID},Context.Request.Scheme)','Update Employee')" class="btn btn-sm btn-outline-warning"><i class="fas fa-pencil-alt"></i> </a>
+                @*<a class="btn btn-sm btn-default" asp-action="Details" asp-route-id="@item.CustomerID"><i class="fa fa-list"></i> </a>*@
+                <button data-id="@item.EmployeeID" class="btn btn-sm btn-danger deleteItem" data-bs-toggle="modal" data-bs-target="#deleteDialog"><i class="fa fa-trash"></i></button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
