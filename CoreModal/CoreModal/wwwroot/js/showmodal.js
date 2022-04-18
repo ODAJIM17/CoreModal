@@ -44,7 +44,7 @@ jQueryAjaxPost = form => {
     }
 }
 
-(function (coreDeleteDialog) {
+(function (soccerDeleteDialog) {
 
     var methods = {
         "openModal": openModal,

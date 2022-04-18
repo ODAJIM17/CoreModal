@@ -20,7 +20,7 @@ namespace CoreModal.Data.Entities
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "{0} is required.")]
+      
         [Column(TypeName = "VARCHAR(15)")]
         public string Title { get; set; }
 
